@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+
 const UserSchema = new mongoose.Schema({
         name:{
                 type:String,
@@ -21,5 +23,13 @@ const UserSchema = new mongoose.Schema({
                 maxlength:12,
         },
 });
-
+UserSchema.pre('save' , async function(){
+         // Only hash the password if it has been modified (or is new)
+        if (!this.isModified('password')) {
+        return 
+        }
+        // Hash the password
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+});
 module.exports = mongoose.model("User" , UserSchema);
