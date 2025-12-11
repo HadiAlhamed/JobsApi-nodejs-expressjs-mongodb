@@ -4,7 +4,13 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "fix-all": "npm run lint:fix && npm run format",
+    "precommit": "npm run lint && npm run format:check"
   },
   "author": "",
   "license": "ISC",
@@ -20,13 +26,19 @@
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^7.0.0",
-    "mongoose": "^5.13.2",
+    "mongoose": "^9.0.1",
     "rate-limiter": "^0.2.0",
     "swagger-ui-express": "^4.1.6",
     "xss-clean": "^0.1.1",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.9"
+    "@eslint/js": "^9.39.1",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.5.0",
+    "nodemon": "^2.0.9",
+    "prettier": "^3.7.4"
   }
 }
